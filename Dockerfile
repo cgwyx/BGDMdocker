@@ -1,6 +1,17 @@
-# Standalone antiSMASH build
-# VERSION 0.0.5
-
+#################################################################
+# Dockerfile
+#
+# Version:          4.0
+# Software:         prokka,panX&antismash
+# Software Version: 1.12,1.0,3.0.5.1
+# Description:      BGDMdocker: an workflow base on Docker for analysis and visualization pan-genome and biosynthetic gene clusters of Bacterial with antismash database
+# Code:             https://github.com/cgwyx/BGDMdocker
+# Base Image:       debian:jessie
+# Build Cmd:        sudo docker build -t BGDMdocker:latest .
+# Pull Cmd:        sudo docker pull BGDMdocker:latest
+# Run Cmd:          sudo docker run -it --rm -v /home:/home -p 8000:8000 --name=BGDMdocker BGDMdocker:latest
+# File Author / Maintainer: cheng gong <512543469@qq.com>
+#################################################################
 FROM antismash/standalone-lite:4.0.0
 
 MAINTAINER cheng gong <512543469@qq.com>
@@ -13,11 +24,6 @@ WORKDIR /antismash-${ANTISMASH_VERSION}
 RUN python download_databases.py
 
 ADD instance.cfg antismash/config/instance.cfg
-
-#VOLUME ["/input", "/output"]
-#WORKDIR /output
-
-#ENTRYPOINT ["/usr/local/bin/run"]
 
 #######miniconda##########
 #FROM debian:8.5
@@ -42,18 +48,17 @@ RUN apt-get install -y curl grep sed dpkg && \
     
 ENV PATH /opt/conda/bin:$PATH
 
-#ENTRYPOINT [ "/usr/bin/tini", "--" ]
-#CMD [ "/bin/bash" ]    
-
 #######prokka##########
 RUN conda update --all -y &&\
          conda config --add channels r &&\
          conda config --add channels bioconda &&\
          conda config --set show_channel_urls yes &&\
          conda install -y prokka=1.12
-         
-#CMD ["/bin/bash"]
+
 ##########pan-genome-analysis############
+ADD ./panx-docker-add-new-pages-repo.sh / \
+         ./panx-docker-link-to-server.py  /
+
 RUN conda update --all -y &&\
          conda config --add channels r &&\
          conda config --add channels bioconda &&\
@@ -72,12 +77,10 @@ RUN conda install nodejs=4.4.1 &&\
          git submodule update --init && \
          npm install
 
-ADD ./panx-docker-add-new-pages-repo.sh / \
-         ./panx-docker-link-to-server.py  /
-
 #Expose port 8000 (webserver)
 EXPOSE :8000
 
 WORKDIR /pan-genome-analysis
 
+#ENTRYPOINT ["/usr/local/bin/run"]
 CMD ["/bin/bash"]
