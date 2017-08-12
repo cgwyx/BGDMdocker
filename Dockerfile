@@ -3,7 +3,7 @@
 #
 # Version:          4.0
 # Software:         prokka,panX&antismash
-# Software Version: 1.12,1.0,3.0.5.1
+# Software Version: 1.12,2.0,4.0.0
 # Description:      BGDMdocker: an workflow base on Docker for analysis and visualization pan-genome and biosynthetic gene clusters of Bacterial with antismash database
 # Code:             https://github.com/cgwyx/BGDMdocker
 # Base Image:       debian:jessie
@@ -26,8 +26,6 @@ RUN python download_databases.py
 ADD instance.cfg antismash/config/instance.cfg
 
 #######miniconda##########
-#FROM debian:8.5
-
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 
 RUN apt-get update --fix-missing && apt-get install -y wget bzip2 ca-certificates \
