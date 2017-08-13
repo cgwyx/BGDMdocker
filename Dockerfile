@@ -25,6 +25,7 @@ RUN python download_databases.py
 
 ADD instance.cfg antismash/config/instance.cfg
 
+ENV PATH /antismash-${ANTISMASH_VERSION}:$PATH
 #######miniconda##########
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 
@@ -79,6 +80,8 @@ RUN conda install nodejs=4.4.1 &&\
 EXPOSE :8000
 
 WORKDIR /pan-genome-analysis
+
+ENV PATH /pan-genome-analysis:$PATH
 
 #ENTRYPOINT ["/usr/local/bin/run"]
 CMD ["/bin/bash"]
