@@ -83,5 +83,5 @@ WORKDIR /pan-genome-analysis
 
 ENV PATH /pan-genome-analysis:$PATH
 
-#ENTRYPOINT ["/usr/local/bin/run"]
+ENTRYPOINT []
 CMD ["/bin/bash"]
