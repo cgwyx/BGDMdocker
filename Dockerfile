@@ -77,7 +77,7 @@ RUN conda install nodejs=4.4.1 &&\
          npm install
 
 ADD ./panx-docker-add-new-pages-repo.sh / \
-         ./panx-docker-link-to-server.py  /
+    ./panx-docker-link-to-server.py  /
 
 #Expose port 8000 (webserver)
 EXPOSE :8000
