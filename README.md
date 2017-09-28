@@ -293,16 +293,11 @@ $ ./edirect/setup.sh
 2. Download “*genomic.gbff.gz” of all strains of Bacillus amyloliquefaciens from GenBank
 
 $ esearch -db assembly -query "Bacillus amyloliquefaciens [ORGN]" | efetch -format docsum | xtract -pattern "DocumentSummary" -element 
-
-  FtpPath_GenBank | sed 's/$/\/*genomic.gbff.gz/' |xargs wget -c -nd;sleep 3s;
+ FtpPath_GenBank | sed 's/$/\/*genomic.gbff.gz/' |xargs wget -c -nd;sleep 3s;
 
 3. Download “*genomic.gbff.gz” of all Bacillus amyloliquefaciens strains from RefSeq
 
-$ esearch -db assembly -query "Bacillus amyloliquefaciens[ORGN]" | 
-
-  efetch -format docsum | xtract -pattern "DocumentSummary" -element FtpPath_RefSeq | sed 's/$/\/*genomic.gbff.gz/' |xargs wget -c 
-
-  -nd;sleep 3s;
+$ esearch -db assembly -query "Bacillus amyloliquefaciens[ORGN]" |  efetch -format docsum | xtract -pattern "DocumentSummary" -element FtpPath_RefSeq | sed 's/$/\/*genomic.gbff.gz/' |xargs wget -c -nd;sleep 3s;
 
 Visualizing results (local host)
 
