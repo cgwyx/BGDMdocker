@@ -36,29 +36,53 @@ $ unzip BGDMdocker-master.zip
 2) Build workflow Images:
 
 $ cd ./BGDMdocker
+
 $ docker build -t BGDMdocker:latest .
+
 Or:pull Images of BGDMdocker from DockerHub,such as :
+
 $ docker pull cgwyx/BGDMdocker
+
 3) Running Container and Prokka to genome annotation
+
 Copy the following commands to run the analysis for genome annotation of Ba_xx strains (for 
+
 boldface text, please enter your data): (if you have your own genome sequences, you need this 
+
 step to generate “*.gbff” annotation files):
+
 $ docker run —rm -v home:home BGDMdocker \
+
 　prokka --kingdom Bacteria --gcode 11 --genus Bacillus \
+ 
 　--species Amyloliquefaciens \
+ 
 　--strain Ba_xx --locustag Ba_xx --prefix Ba_xx --rfam \
+ 
 　--rawproduct --outdir /home/manager/PRJNA291327 \
+ 
 　/home/manager/Ba_xx.fasta
+ 
 “Ba_xx.fasta” is the genome sequence, “PRJNA291327” is the output folder of results(must be in 
+
 your host).
+
 4) Running panX analysis pan-genome in Container of BGDMdocker in Command line 
+
 interaction patterns.
+
    PanX starts with a set of annotated sequences files, *.gbff (.gbk) (e.g., NCBI RefSeq or 
+   
 GenBank),and these data should also reside in a folder within“ /pan-genome-analysis/data/ ”
+
 in Container,we will refer to this folder as run directory below. The name of the run directory is 
+
 used as a species name in down-stream analysis and visualization.Therefore,you need to enter the 
+
 Container to run the relevant commands,and commit the Container to save image of visualization 
+
 at last,Copy the following commands to run the analysis of the pan-genome of 44 B. 
+
 amyloliquefaciens strains from the command-line interface of Container (for boldface text, please 
 enter your data). For detailed parameters see here.
 $ cd /pan-genome-analysis
