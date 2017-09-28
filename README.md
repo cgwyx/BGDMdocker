@@ -128,13 +128,13 @@ $ docker run —rm -v home:home BGDMdocker:latest \
 
    --outputfolder /home/manager/output/Y2_out \
 
-  --dbgclusterblast ./generic_modules/clusterblast \
+   --dbgclusterblast ./generic_modules/clusterblast \
 
-　--pfamdir ./generic_modules/fullhmmer --input-type nucl \
+　 --pfamdir ./generic_modules/fullhmmer --input-type nucl \
 
---knownclusterblast --clusterblast --subclusterblast --asf\
+   --knownclusterblast --clusterblast --subclusterblast --asf\
 
---inclusive --full-hmmer --smcogs --verbose  --borderpredict
+   --inclusive --full-hmmer --smcogs --verbose  --borderpredict
 
 *.gbff (GenBank files) should reside in “input” folder,“Y2 _out” is the output folder for 
 
@@ -268,7 +268,7 @@ $ docker run -it --rm -v home:home cgwyx/antismash4_db:latest  \
 
 　--pfamdir ./generic_modules/fullhmmer --input-type nucl \
 
---knownclusterblast --clusterblast --subclusterblast --asf\
+  --knownclusterblast --clusterblast --subclusterblast --asf\
 
 　--inclusive --full-hmmer --smcogs --verbose  --borderpredict
 
@@ -282,9 +282,7 @@ RefSeq or GenBank databases? Replace boldface text with your species if applicab
 
 1. Installing script on your host
 
-$ wget ftp://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/versions/
-
-　　　　current/edirect.zip
+$ wget ftp://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/versions/current/edirect.zip
 
 $ unzip -u -q edirect.zip
 
@@ -294,23 +292,17 @@ $ ./edirect/setup.sh
 
 2. Download “*genomic.gbff.gz” of all strains of Bacillus amyloliquefaciens from GenBank
 
-$ esearch -db assembly -query "Bacillus amyloliquefaciens [ORGN]" | 
+$ esearch -db assembly -query "Bacillus amyloliquefaciens [ORGN]" | efetch -format docsum | xtract -pattern "DocumentSummary" -element 
 
-efetch -format docsum | xtract -pattern "DocumentSummary" -element 
-
-FtpPath_GenBank | sed 's/$/\/*genomic.gbff.gz/' |xargs wget -c 
-
--nd;sleep 3s;
+  FtpPath_GenBank | sed 's/$/\/*genomic.gbff.gz/' |xargs wget -c -nd;sleep 3s;
 
 3. Download “*genomic.gbff.gz” of all Bacillus amyloliquefaciens strains from RefSeq
 
 $ esearch -db assembly -query "Bacillus amyloliquefaciens[ORGN]" | 
 
-efetch -format docsum | xtract -pattern "DocumentSummary" -element 
+  efetch -format docsum | xtract -pattern "DocumentSummary" -element FtpPath_RefSeq | sed 's/$/\/*genomic.gbff.gz/' |xargs wget -c 
 
-FtpPath_RefSeq | sed 's/$/\/*genomic.gbff.gz/' |xargs wget -c 
-
--nd;sleep 3s;
+  -nd;sleep 3s;
 
 Visualizing results (local host)
 
