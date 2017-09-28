@@ -1,21 +1,21 @@
 The command line and tip of BGDMdocker
 
 
-1.Guide for BGDMdocker workflow usage：
-1) installing latest Docker-CE (Ubuntu, Debian, Raspbian, Fedora, Centos, Redhat, Suse, Oracle, 
-Linux et al., all applicable):
-$ curl -sSL https://get.docker.com/ | bash -x
-or:
-$ wget -qO- https://get.docker.com/ | bash -x
-adding user to the "docker" group with something like:
-$ sudo usermod -aG docker manager
-Type the following commands at your shell prompt. If this outputs the Docker version, your 
-installation was successful: 
-$ docker version
-On your host (with Docker), type the following command lines to build a BGDMdocker 
-workflow: 
-$ git clone https://github.com/cgwyx/BGDMdocker.git
-Or: download “BGDMdocker-master.zip” file
+1.Guide for BGDMdocker workflow usage：	
+1) installing latest Docker-CE (Ubuntu, Debian, Raspbian, Fedora, Centos, Redhat, Suse, Oracle, 	
+Linux et al., all applicable):	
+$ curl -sSL https://get.docker.com/ | bash -x	
+or:	
+$ wget -qO- https://get.docker.com/ | bash -x	
+adding user to the "docker" group with something like:	
+$ sudo usermod -aG docker manager	
+Type the following commands at your shell prompt. If this outputs the Docker version, your 	
+installation was successful: 	
+$ docker version	
+On your host (with Docker), type the following command lines to build a BGDMdocker 	
+workflow: 	
+$ git clone https://github.com/cgwyx/BGDMdocker.git	
+Or: download “BGDMdocker-master.zip” file	
 $ unzip BGDMdocker-master.zip 
 2) Build workflow Images:
 $ cd ./BGDMdocker
